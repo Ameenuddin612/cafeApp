@@ -36,14 +36,7 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        input[type="text"] {
-            width: 100%;
-            margin-bottom: 15px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        input[type="number"] {
+        input[type="text"], input[type="tel"] {
             width: 100%;
             margin-bottom: 15px;
             padding: 10px;
@@ -61,6 +54,12 @@
         }
         button:hover {
             background-color: #218838;
+        }
+        .invalid-feedback {
+            display: none;
+            color: red;
+            margin-top: -15px;
+            margin-bottom: 15px;
         }
     </style>
 </head>
@@ -86,9 +85,10 @@
     <!-- Main Content -->
     <div class="container">
         <h1 class="text-center mb-4">Add a New Cafe</h1>
-        <form action="/add" method="post">
+        <form id="add-cafe-form" action="/add" method="post">
             <input type="text" name="name" placeholder="Enter the cafe's name" required>
-            <input type="number" name="phone" placeholder="Enter the cafe's phone number" required>
+            <input type="tel" name="phone" placeholder="Enter the cafe's phone number" required>
+            <div class="invalid-feedback">Please enter a valid 10-digit phone number.</div>
             <button type="submit"><i class="fas fa-plus"></i> Add Cafe</button>
         </form>
     </div>
@@ -104,5 +104,22 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JS for validation -->
+    <script>
+        document.querySelector('input[name="phone"]').addEventListener('input', function(event) {
+            const phoneInput = event.target;
+            const feedback = document.querySelector('.invalid-feedback');
+            if (!/^\d*$/.test(phoneInput.value)) {
+                phoneInput.classList.add('is-invalid');
+                feedback.style.display = 'block';
+                alert('Please enter a valid 10-digit phone number.');
+                phoneInput.value = phoneInput.value.replace(/\D/g, ''); // Remove non-numeric characters
+            } else {
+                phoneInput.classList.remove('is-invalid');
+                feedback.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
