@@ -43,6 +43,13 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
+        input[type="number"] {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
         button {
             width: 100%;
             padding: 10px;
@@ -81,7 +88,7 @@
         <h1 class="text-center mb-4">Add a New Cafe</h1>
         <form action="/add" method="post">
             <input type="text" name="name" placeholder="Enter the cafe's name" required>
-            <input type="text" name="phone" placeholder="Enter the cafe's phone number" required>
+            <input type="number" name="phone" placeholder="Enter the cafe's phone number" required>
             <button type="submit"><i class="fas fa-plus"></i> Add Cafe</button>
         </form>
     </div>
